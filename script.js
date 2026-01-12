@@ -6,44 +6,24 @@ let bookInstance = null;
 let genAI = null;
 let model = null;
 
-// Inicializar la IA (Protegido contra errores)
+// Inicializar la IA
 try {
     if(API_KEY) {
         genAI = new GoogleGenerativeAI(API_KEY);
         model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-09-2025" });
     }
 } catch (error) {
-    console.warn("La IA no pudo iniciarse, se usará el modo respaldo.");
+    console.warn("IA no disponible, iniciando modo local.");
 }
 
 // Contexto Real para la IA
 const CONTEXTO_CV = `
-CANDIDATO: Victor R. Lopez. Ingeniero en Telemática (UNAN, 4to año). IT Manager en Kaitai Nicaragua.
+CANDIDATO: Victor R. Lopez. Ingeniero en Telemática (UNAN, 3er año). IT Manager en Kaitai Nicaragua.
 EXPERIENCIA: +6 años. Oficial TI (Mega Comunicaciones), Soporte (Hermoso y Vigil, IPESA).
 HARD SKILLS: Virtualización (VMWare/Proxmox), Windows Server, Linux, Cisco CCNA, Hacking Ético, Soporte L3.
+CONTACTO: victorlpz3293@gmail.com, +505 8133-6115.
+UBICACIÓN: Ciudad Sandino, Managua.
 `;
-
-// Carta de Respaldo (Por si la IA falla)
-const CARTA_RESPALDO = `Estimado(a) Gerente de Selección,
-
-Es un placer presentar mi candidatura para la posición de Responsable de TI / Administrador de Sistemas.
-
-Con más de 6 años de experiencia técnica y mi rol actual liderando el departamento de TI en Kaitai Nicaragua S.A., he desarrollado una capacidad única para alinear la infraestructura tecnológica con los objetivos críticos del negocio.
-
-Mi trayectoria incluye la administración experta de entornos virtualizados (VMWare ESXi y ProxmoxVE), la gestión de seguridad en redes corporativas y el liderazgo de equipos de soporte técnico. En mi experiencia previa en Mega Comunicaciones, logré optimizar la disponibilidad de los servicios reduciendo drásticamente los tiempos de inactividad.
-
-¿Qué puedo aportar a su equipo?
-1. Visión Integral: Combino conocimientos de ingeniería en telemática con gestión operativa real.
-2. Solidez Técnica: Domino desde el cableado estructurado hasta la configuración avanzada de servidores Windows/Linux.
-3. Enfoque en Seguridad: Cuento con certificaciones en Hacking Ético y Análisis Forense, garantizando una infraestructura protegida.
-
-Estoy listo para llevar su infraestructura tecnológica al siguiente nivel de eficiencia y seguridad.
-
-Atentamente,
-
-Victor R. Lopez
-Ingeniero en Telemática & IT Manager
-+505 8133-6115 | victorlpz3293@gmail.com`;
 
 // --- INICIALIZACIÓN DEL LIBRO ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -64,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bookInstance.loadFromHTML(document.querySelectorAll('.page'));
 });
 
-// --- CHATBOT (Híbrido: IA + Respuestas Rápidas) ---
+// --- CHATBOT INTELIGENTE (HÍBRIDO) ---
 const chatWindow = document.getElementById('chat-window');
 const chatInput = document.getElementById('chat-input');
 const msgsDiv = document.getElementById('chat-messages');
@@ -93,20 +73,56 @@ async function sendMessage() {
     
     try {
         if (!model) throw new Error("Sin modelo");
-        // Intentar con IA Real
-        const prompt = `Eres el asistente de Victor Lopez. Responde brevemente (max 40 palabras) a: "${text}". Contexto: ${CONTEXTO_CV}`;
+        
+        // 1. INTENTO CON IA REAL
+        const prompt = `Eres el asistente de Victor Lopez. Responde brevemente (max 30 palabras) a: "${text}". Contexto: ${CONTEXTO_CV}`;
         const result = await model.generateContent(prompt);
         const response = result.response.text();
         
         document.getElementById(loadId).remove();
         addMsg(formatText(response), 'ai-msg');
+
     } catch (e) {
-        // Fallback si la IA falla (Respuestas predefinidas)
+        // 2. SI FALLA LA IA, USA EL CEREBRO LOCAL (RESPALDO INTELIGENTE)
+        // Esto es lo que faltaba: lógica para responder si la API falla
         document.getElementById(loadId).remove();
-        let resp = "Victor tiene +6 años de experiencia en TI, virtualización y redes. Contacto: victorlpz3293@gmail.com";
-        if(text.toLowerCase().includes("hola")) resp = "¡Hola! Soy el asistente virtual de Victor. ¿En qué puedo ayudarte?";
-        addMsg(resp, 'ai-msg');
+        const respuestaLocal = cerebroLocal(text.toLowerCase());
+        addMsg(respuestaLocal, 'ai-msg');
     }
+}
+
+// --- CEREBRO LOCAL (Respaldo inteligente sin internet/API) ---
+function cerebroLocal(pregunta) {
+    if (pregunta.includes('contacto') || pregunta.includes('correo') || pregunta.includes('celular') || pregunta.includes('llamar')) {
+        return "Puedes contactar a Victor al <b>+505 8133-6115</b> o escribir a <b>victorlpz3293@gmail.com</b>.";
+    }
+    
+    if (pregunta.includes('donde') || pregunta.includes('vive') || pregunta.includes('ubicacion')) {
+        return "Victor reside actualmente en <b>Ciudad Sandino, Managua</b>.";
+    }
+
+    if (pregunta.includes('trabaja') || pregunta.includes('actual') || pregunta.includes('empresa') || pregunta.includes('ahora')) {
+        return "Actualmente es <b>Responsable de TI en Kaitai Nicaragua S.A.</b> (desde Sept 2025).";
+    }
+
+    if (pregunta.includes('experiencia') || pregunta.includes('trabajo') || pregunta.includes('trayectoria')) {
+        return "Tiene <b>+6 años de experiencia</b>. Ha trabajado en Kaitai, Mega Comunicaciones, Hermoso y Vigil e IPESA.";
+    }
+    
+    if (pregunta.includes('estudios') || pregunta.includes('universidad') || pregunta.includes('titulo') || pregunta.includes('carrera')) {
+        return "Estudia <b>Ingeniería en Telemática</b> (3er año) en la UNAN-Managua y es Técnico Medio en Computación.";
+    }
+    
+    if (pregunta.includes('habilidades') || pregunta.includes('sabe') || pregunta.includes('tecnologias') || pregunta.includes('skills')) {
+        return "Domina <b>Virtualización (VMWare/Proxmox)</b>, Windows Server, Linux, Redes Cisco/Mikrotik y Ciberseguridad.";
+    }
+    
+    if (pregunta.includes('hola') || pregunta.includes('buenos')) {
+        return "¡Hola! Soy el asistente virtual. Pregúntame sobre la experiencia o habilidades de Victor.";
+    }
+    
+    // Respuesta por defecto si no entiende nada
+    return "Victor es un profesional TI con experiencia en Infraestructura y Redes. ¿Te gustaría saber sobre su <b>Experiencia</b> o <b>Contacto</b>?";
 }
 
 function addMsg(html, cssClass) {
@@ -120,10 +136,27 @@ function addMsg(html, cssClass) {
 
 function formatText(text) { return text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); }
 
-// --- GENERADOR DE CARTA (ROBUSTO) ---
+// --- GENERADOR DE CARTA ---
 const modal = document.getElementById('modal-overlay');
 const modalContent = document.getElementById('modal-content');
 const btnCover = document.getElementById('btn-cover-letter');
+
+// Carta de Respaldo Fija
+const CARTA_RESPALDO = `Estimado(a) Gerente de Selección,
+
+Es un placer presentar mi candidatura para la vacante que tiene disponible en areas de TI.
+
+Con más de 6 años de experiencia técnica y mi rol actual liderando el departamento de TI en Kaitai Nicaragua S.A., he desarrollado una capacidad única para alinear la infraestructura tecnológica con los objetivos críticos del negocio.
+
+Mi trayectoria incluye la administración experta de entornos virtualizados (VMWare ESXi y ProxmoxVE), la gestión de seguridad en redes corporativas y el liderazgo de equipos de soporte técnico.
+
+Estoy listo para llevar su infraestructura tecnológica al siguiente nivel de eficiencia y seguridad.
+
+Atentamente,
+
+Victor R. Lopez
+Ingeniero en Telemática & IT Manager
++505 8133-6115 | victorlpz3293@gmail.com`;
 
 if(btnCover) {
     btnCover.addEventListener('click', async () => {
@@ -132,17 +165,14 @@ if(btnCover) {
         btnCover.disabled = true;
         
         try {
-            if (!model) throw new Error("Simular error para usar respaldo");
-            
-            // Intentar IA Real
-            const prompt = `Escribe una Carta de Presentación profesional para Victor Lopez dirigida a RRHH. Usa el contexto: ${CONTEXTO_CV}. Sin saludos ni fechas, solo cuerpo.`;
+            if (!model) throw new Error("Forzar respaldo");
+            // Intento IA
+            const prompt = `Escribe una Carta de Presentación breve y profesional para Victor Lopez. Contexto: ${CONTEXTO_CV}`;
             const result = await model.generateContent(prompt);
             modalContent.innerText = result.response.text();
-            
         } catch (e) {
-            console.log("Usando carta de respaldo...");
-            // Si falla, usar carta pre-escrita (Simulando carga)
-            await new Promise(r => setTimeout(r, 1500)); 
+            // Respaldo
+            await new Promise(r => setTimeout(r, 1000));
             modalContent.innerText = CARTA_RESPALDO;
         } finally {
             modal.classList.remove('hidden');
@@ -155,7 +185,7 @@ if(btnCover) {
 window.closeModal = () => modal.classList.add('hidden');
 window.copyText = () => navigator.clipboard.writeText(modalContent.innerText).then(() => alert("Copiado"));
 
-// --- GENERADOR PDF ---
+// --- PDF ---
 window.downloadPDF = function() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -164,7 +194,6 @@ window.downloadPDF = function() {
     const pageWidth = doc.internal.pageSize.getWidth();
     const maxLineWidth = pageWidth - (marginLeft * 2);
 
-    // Encabezado
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
     doc.setTextColor(30, 58, 138);
@@ -177,7 +206,6 @@ window.downloadPDF = function() {
     doc.setDrawColor(200);
     doc.line(marginLeft, 36, pageWidth - marginLeft, 36);
 
-    // Cuerpo
     doc.setFont("times", "normal");
     doc.setFontSize(12);
     doc.setTextColor(0);
