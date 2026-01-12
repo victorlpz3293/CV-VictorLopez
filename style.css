@@ -1,0 +1,220 @@
+/* --- UNIVERSO (FONDO) --- */
+body {
+    margin: 0;
+    padding: 0;
+    /* Fondo oscuro moderno con patrón sutil */
+    background-color: #0f172a;
+    background-image: 
+        radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.book-scene {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- ESTILO DE PÁGINAS BASE --- */
+.page {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.02); /* Sutil textura interna */
+}
+
+/* Sombra del lomo (Efecto Curvatura) */
+.--left {
+    background: linear-gradient(to right, #ffffff 90%, #e6e6e6 100%);
+    border-right: 1px solid #d4d4d4;
+}
+.--right {
+    background: linear-gradient(to left, #ffffff 90%, #e6e6e6 100%);
+    border-left: 1px solid #d4d4d4;
+}
+
+/* --- PORTADAS (HARD COVERS) --- */
+.hard-cover {
+    background: #1e293b; /* Color base oscuro */
+    color: white;
+    border: 4px solid #334155;
+}
+
+.cover-design {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(15,23,42,0.95) 100%);
+    position: relative;
+}
+
+/* Foto con brillo */
+.profile-glow {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(45deg, #3b82f6, #06b6d4); /* Anillo de color */
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+.profile-glow img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1e293b;
+}
+
+/* Tipografía Portada */
+.main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+.subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: #94a3b8;
+    margin-top: 1rem;
+}
+.tech-lines {
+    width: 60px;
+    height: 4px;
+    background: #06b6d4;
+    margin: 1rem 0;
+    border-radius: 2px;
+}
+.badge-2026 {
+    margin-top: 3rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    background: rgba(255,255,255,0.05);
+}
+
+/* --- SECCIONES FULL COLOR (Divisores) --- */
+.section-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.bg-blue {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+}
+.bg-dark {
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+    color: white;
+}
+.white-line { width: 40px; height: 3px; background: white; margin: 1rem auto; }
+.cyan-line { width: 40px; height: 3px; background: #22d3ee; margin: 1rem auto; }
+
+/* --- CONTENIDO INTERNO --- */
+.page-header {
+    padding: 1.5rem 2rem 0.5rem;
+    border-bottom: 2px solid #f1f5f9;
+}
+.page-header h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.page-content {
+    padding: 2rem;
+    height: calc(100% - 60px); /* Restar header */
+    overflow-y: auto;
+}
+.center-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Tarjetas */
+.modern-card {
+    background: #f8fafc;
+    border-left: 4px solid #3b82f6;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+/* Nube de Tags */
+.tags-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Timeline de Trabajo */
+.job-timeline { border-left: 2px solid #e2e8f0; margin-left: 10px; padding-left: 20px; }
+.job-item { position: relative; margin-bottom: 2rem; }
+.job-icon {
+    position: absolute; left: -29px; top: 0;
+    width: 18px; height: 18px;
+    background: #3b82f6; color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.6rem;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.job-list { list-style: disc; margin-left: 1rem; font-size: 0.85rem; color: #64748b; margin-top: 0.5rem; }
+
+/* Grid de Skills */
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+.skill-box {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+.skill-box:hover { transform: translateY(-2px); border-color: #3b82f6; }
+.skill-box i { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+.skill-box span { font-size: 0.8rem; font-weight: 600; color: #475569; }
+
+/* Botones y Varios */
+.page-number { position: absolute; bottom: 1rem; width: 100%; text-align: center; color: #cbd5e1; font-size: 0.7rem; }
+.btn-glass { background: rgba(255,255,255,0.1); color: white; padding: 8px 16px; border-radius: 6px; backdrop-filter: blur(4px); transition: 0.3s; }
+.btn-glass:hover { background: white; color: black; }
+.action-btn { background: #2563eb; color: white; padding: 10px 20px; border-radius: 99px; font-weight: bold; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); transition: 0.3s; }
+.action-btn:hover { background: #1d4ed8; transform: scale(1.05); }
+
+/* Logo Final */
+.logo-final {
+    width: 60px; height: 60px; border: 2px solid #94a3b8; color: #94a3b8;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; font-weight: bold; border-radius: 50%;
+}

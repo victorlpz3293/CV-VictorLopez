@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Interactivo - Victor R. Lopez</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="fixed top-4 left-4 z-50 flex gap-2 no-print">
+        <button onclick="window.print()" class="btn-glass"><i class="fas fa-file-pdf"></i> Guardar Portafolio</button>
+    </div>
+
+    <div class="book-scene">
+        <div id="book">
+            
+            <div class="page hard-cover">
+                <div class="cover-design">
+                    <div class="profile-glow">
+                        <img src="assets/perfil.jpg" alt="Victor" onerror="this.style.display='none';">
+                        <i class="fas fa-user-tie fallback-icon"></i>
+                    </div>
+                    <h1 class="main-title">VICTOR R.<br><span class="text-blue-400">LOPEZ</span></h1>
+                    <div class="tech-lines"></div>
+                    <h2 class="subtitle">INGENIERO EN TELEMÁTICA<br>& IT MANAGER</h2>
+                    <div class="badge-2026">PORTAFOLIO 2026</div>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="page-content center-content">
+                    <div class="quote-box">
+                        <i class="fas fa-quote-left text-blue-200 text-4xl mb-4"></i>
+                        <p class="text-xl font-light italic text-gray-600">
+                            "Transformo infraestructura tecnológica compleja en soluciones operativas, seguras y escalables."
+                        </p>
+                        <div class="w-12 h-1 bg-blue-500 mx-auto mt-6"></div>
+                    </div>
+                    
+                    <div class="mt-12 w-full px-8">
+                        <h4 class="text-center font-bold text-gray-400 text-xs tracking-widest uppercase mb-4">Idiomas</h4>
+                        <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+                            <span class="font-bold text-gray-700">Español</span>
+                            <span class="text-sm text-blue-600">Nativo / Bilingüe</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="font-bold text-gray-700">Inglés</span>
+                            <span class="text-sm text-gray-500">Competencia Básica Profesional</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-number">02</div>
+            </div>
+
+            <div class="page">
+                <div class="page-header">
+                    <h3><i class="fas fa-user-astronaut"></i> Perfil Profesional</h3>
+                </div>
+                <div class="page-content">
+                    <div class="modern-card">
+                        <p class="text-sm leading-relaxed mb-3">
+                            Profesional con <strong>+6 años de experiencia</strong> en la gestión de ciclos de vida de TI completos. Mi enfoque combina la administración robusta de servidores con prácticas modernas de ciberseguridad.
+                        </p>
+                        <p class="text-sm leading-relaxed">
+                            Experto en entornos híbridos (Windows/Linux), virtualización avanzada y liderazgo de equipos de soporte.
+                        </p>
+                        <div class="tags-cloud mt-4">
+                            <span class="tag">ITIL Foundation</span>
+                            <span class="tag">Gestión de Proyectos</span>
+                            <span class="tag">Liderazgo de Equipos</span>
+                            <span class="tag">Resolución de Problemas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="font-bold text-gray-700 text-sm mb-3">Aptitudes Interpersonales</h4>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                            <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Servicio al Cliente</div>
+                            <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Planificación</div>
+                            <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Capacidad de Análisis</div>
+                            <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Formación de Usuarios</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-number">03</div>
+            </div>
+
+            <div class="page section-cover bg-blue">
+                <div class="section-content">
+                    <i class="fas fa-briefcase text-6xl text-white/80 mb-6"></i>
+                    <h2 class="text-white text-3xl font-bold uppercase tracking-widest">Experiencia<br>Laboral</h2>
+                    <div class="white-line"></div>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="page-header">
+                    <h3 class="text-2xl font-black text-blue-900">2025 - ACTUALIDAD</h3>
+                </div>
+                <div class="page-content">
+                    <div class="mt-4">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700 text-xl">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">Responsable de TI</h4>
+                                <h5 class="text-gray-600 font-medium">Kaitai Nicaragua S.A.</h5>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500 mb-4">
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-2">Responsabilidades Clave</p>
+                            <ul class="job-list space-y-3 text-sm text-gray-700">
+                                <li><i class="fas fa-angle-right text-blue-500 mr-2"></i><strong>Gestión Integral:</strong> Aseguramiento de la continuidad operativa y alineación tecnológica con metas empresariales.</li>
+                                <li><i class="fas fa-angle-right text-blue-500 mr-2"></i><strong>Infraestructura:</strong> Administración de servidores físicos y virtuales con alta disponibilidad.</li>
+                                <li><i class="fas fa-angle-right text-blue-500 mr-2"></i><strong>Gestión Estratégica:</strong> Planificación de presupuestos y relación con proveedores tecnológicos.</li>
+                                <li><i class="fas fa-angle-right text-blue-500 mr-2"></i><strong>Optimización:</strong> Mejora de tiempos de respuesta ante incidencias críticas.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <span class="text-xs font-bold text-gray-400 uppercase">Tecnologías:</span>
+                            <div class="tags-cloud mt-1">
+                                <span class="tag">Gestión TI</span>
+                                <span class="tag">Virtualización</span>
+                                <span class="tag">Presupuestos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-number">05</div>
+            </div>
+
+            <div class="page">
+                <div class="page-header">
+                    <h3 class="text-2xl font-black text-gray-700">2022 - 2025</h3>
+                </div>
+                <div class="page-content">
+                    <div class="mt-4">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700 text-xl">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">Oficial de TI</h4>
+                                <h5 class="text-gray-600 font-medium">Mega Comunicaciones S.A.</h5>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400 mb-4">
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-2">Logros y Funciones</p>
+                            <ul class="job-list space-y-3 text-sm text-gray-700">
+                                <li><i class="fas fa-angle-right text-gray-400 mr-2"></i><strong>Virtualización:</strong> Configuración e implementación experta en <strong>VMWare ESXi</strong> y <strong>ProxmoxVE</strong>.</li>
+                                <li><i class="fas fa-angle-right text-gray-400 mr-2"></i><strong>SysAdmin:</strong> Control total de Active Directory, DNS local y Políticas de Grupo (GPO).</li>
+                                <li><i class="fas fa-angle-right text-gray-400 mr-2"></i><strong>VoIP:</strong> Administración de centrales telefónicas IP-PBX Grandstream.</li>
+                                <li><i class="fas fa-angle-right text-gray-400 mr-2"></i><strong>Metodología:</strong> Gestión de servicios basada en buenas prácticas ITIL.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-auto">
+                            <span class="text-xs font-bold text-gray-400 uppercase">Tecnologías:</span>
+                            <div class="tags-cloud mt-1">
+                                <span class="tag">VMWare</span>
+                                <span class="tag">Proxmox</span>
+                                <span class="tag">Active Directory</span>
+                                <span class="tag">Grandstream</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-number">06</div>
+            </div>
+
+            <div class="page">
+                <div class="page-header">
+                    <h3 class="text-2xl font-black text-gray-700">2020 - 2022</h3>
+                </div>
+                <div class="page-content">
+                    <div class="mt-4">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center text-red-600 text-xl">
+                                <i class="fas fa-print"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">Ejecutivo de Servicio Técnico</h4>
+                                <h5 class="text-gray-600 font-medium">Hermoso y Vigil, S.A.</h5>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-red-400 mb-4">
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-2">Responsabilidades</p>
+                            <ul class="job-list space-y-3 text-sm text-gray-700">
+                                <li><i class="fas fa-angle-right text-red-400 mr-2"></i>Instalación y capacitación de equipos multifuncionales de la marca <strong>RICOH</strong>.</li>
+                                <li><i class="fas fa-angle-right text-red-400 mr-2"></i>Mantenimiento preventivo y correctivo de hardware de impresión.</li>
+                                <li><i class="fas fa-angle-right text-red-400 mr-2"></i>Implementación de software <strong>PaperCut</strong> para control de costos y gestión documental.</li>
+                                <li><i class="fas fa-angle-right text-red-400 mr-2"></i>Enfoque total en la satisfacción del cliente y calidad de servicio.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <span class="text-xs font-bold text-gray-400 uppercase">Tecnologías:</span>
+                            <div class="tags-cloud mt-1">
+                                <span class="tag">Ricoh MFP</span>
+                                <span class="tag">PaperCut MF</span>
+                                <span class="tag">Soporte Hardware</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-number">07</div>
+            </div>
+
+            <div class="page">
+                <div class="page-header">
+                    <h3 class="text-2xl font-black text-gray-700">2017 - 2019</h3>
+                </div>
+                <div class="page-content">
+                    <div class="mt-4">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">Soporte Técnico</h4>
+                                <h5 class="text-gray-600 font-medium">IPESA de Nicaragua</h5>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-green-500 mb-4">
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-2">Funciones Principales</p>
+                            <ul class="job-list space-y-3 text-sm text-gray-700">
+                                <li><i class="fas fa-angle-right text-green-500 mr-2"></i>Mantenimiento a servidores empresariales <strong>HPE (Hewlett Packard Enterprise)</strong>.</li>
+                                <li><i class="fas fa-angle-right text-green-500 mr-2"></i>Soporte y mantenimiento a equipos de cómputo marca Lenovo.</li>
+                                <li><i class="fas fa-angle-right text-green-500 mr-2"></i>Ejecución de virtualización inicial utilizando <strong>VMWare ESX</strong>.</li>
+                                <li><i class="fas fa-angle-right text-green-500 mr-2"></i>Configuración y administración de infraestructura de redes y comunicaciones.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-auto">
+                            <span class="text-xs font-bold text-gray-400 uppercase">Tecnologías:</span>
+                            <div class="tags-cloud mt-1">
+                                <span class="tag">HPE Servers</span>
+                                <span class="tag">Lenovo</span>
+                                <span class="tag">VMWare ESX</span>
+                                <span class="tag">Redes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-number">08</div>
+            </div>
+
+            <div class="page section-cover bg-dark">
+                <div class="section-content">
+                    <i class="fas fa-layer-group text-6xl text-cyan-400 mb-6"></i>
+                    <h2 class="text-white text-3xl font-bold uppercase tracking-widest">Stack<br>Tecnológico</h2>
+                    <div class="cyan-line"></div>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="page-content center-content">
+                    <h4 class="w-full text-left mb-4 font-bold text-gray-700 uppercase text-sm">Competencias Técnicas</h4>
+                    <div class="skills-grid">
+                        <div class="skill-box">
+                            <i class="fab fa-windows text-blue-600"></i>
+                            <span>Windows Server</span>
+                        </div>
+                        <div class="skill-box">
+                            <i class="fab fa-linux text-yellow-500"></i>
+                            <span>Linux Admin</span>
+                        </div>
+                        <div class="skill-box">
+                            <i class="fas fa-server text-green-600"></i>
+                            <span>VMWare / Proxmox</span>
+                        </div>
+                        <div class="skill-box">
+                            <i class="fas fa-network-wired text-purple-600"></i>
+                            <span>Cisco / Mikrotik</span>
+                        </div>
+                        <div class="skill-box">
+                            <i class="fas fa-shield-alt text-red-500"></i>
+                            <span>Hacking Ético</span>
+                        </div>
+                        <div class="skill-box">
+                            <i class="fas fa-search text-orange-500"></i>
+                            <span>Forense Digital</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 w-full">
+                        <h4 class="font-bold text-gray-700 uppercase text-sm mb-2">Herramientas & Software</h4>
+                        <div class="tags-cloud">
+                            <span class="tag">Microsoft 365</span>
+                            <span class="tag">PaperCut</span>
+                            <span class="tag">Grandstream PBX</span>
+                            <span class="tag">Adobe CS6 Suite</span>
+                            <span class="tag">Packet Tracer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-number">09</div>
+            </div>
+
+            <div class="page">
+                <div class="page-header">
+                    <h3><i class="fas fa-graduation-cap"></i> Formación Académica</h3>
+                </div>
+                <div class="page-content">
+                    <div class="edu-card border-l-4 border-green-500 pl-4 py-3 mb-6 bg-green-50 rounded-r">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">Ingeniería en Telemática</h4>
+                                <p class="text-sm text-gray-600">UNAN - Managua</p>
+                                <p class="text-xs text-green-700 font-bold mt-1">4to Año - En curso (2023 - 2027)</p>
+                            </div>
+                            <i class="fas fa-university text-green-200 text-3xl"></i>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">
+                            Enfoque en desarrollo de software, gestión de redes de computadoras y sistemas computacionales.
+                        </p>
+                    </div>
+
+                    <div class="edu-card border-l-4 border-gray-400 pl-4 py-3 bg-gray-50 rounded-r">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-gray-800">Técnico Medio en Computación</h4>
+                                <p class="text-sm text-gray-600">Megabyte Service S.A.</p>
+                                <p class="text-xs text-gray-500 mt-1">2012 - 2014</p>
+                            </div>
+                            <i class="fas fa-tools text-gray-300 text-2xl"></i>
+                        </div>
+                        <ul class="text-xs text-gray-500 mt-2 list-disc ml-4">
+                            <li>Reparación y Mantenimiento de PC.</li>
+                            <li>Cableado Estructurado.</li>
+                            <li>Diseño Gráfico (Adobe CS6).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-number">10</div>
+            </div>
+
+            <div class="page">
+                <div class="page-header">
+                    <h3><i class="fas fa-certificate"></i> Certificaciones</h3>
+                </div>
+                <div class="page-content">
+                    <div class="grid grid-cols-1 gap-3">
+                        
+                        <div class="cert-item flex gap-3 items-center border-b border-gray-50 pb-2">
+                            <div class="w-10 text-red-500 text-xl text-center"><i class="fas fa-shield-virus"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Analista SOC Nivel 1</h4>
+                                <p class="text-xs text-gray-500">Comunidad DOJO (Ene 2025)</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-item flex gap-3 items-center border-b border-gray-50 pb-2">
+                            <div class="w-10 text-blue-500 text-xl text-center"><i class="fab fa-google"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Google IT Support Professional</h4>
+                                <p class="text-xs text-gray-500">Google Career Certificates (Dic 2024)</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-item flex gap-3 items-center border-b border-gray-50 pb-2">
+                            <div class="w-10 text-blue-800 text-xl text-center"><i class="fas fa-network-wired"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">CCNAv7: Introduction to Networks</h4>
+                                <p class="text-xs text-gray-500">Cisco Networking Academy (Dic 2023)</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-item flex gap-3 items-center border-b border-gray-50 pb-2">
+                            <div class="w-10 text-purple-600 text-xl text-center"><i class="fas fa-search"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Análisis Forense en Windows</h4>
+                                <p class="text-xs text-gray-500">UCAPEM Group (Ago 2022)</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-item flex gap-3 items-center border-b border-gray-50 pb-2">
+                            <div class="w-10 text-gray-700 text-xl text-center"><i class="fas fa-lock"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Securitización (CIS Control)</h4>
+                                <p class="text-xs text-gray-500">Capacitación Usach (Jun 2022)</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-item flex gap-3 items-center border-b border-gray-50 pb-2">
+                            <div class="w-10 text-blue-400 text-xl text-center"><i class="fas fa-laptop-code"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Introduction to Packet Tracer</h4>
+                                <p class="text-xs text-gray-500">Cisco Networking Academy (Feb 2022)</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-item flex gap-3 items-center border-b border-gray-50 pb-2">
+                            <div class="w-10 text-blue-700 text-xl text-center"><i class="fab fa-linkedin"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Especialista en Soporte IT</h4>
+                                <p class="text-xs text-gray-500">LinkedIn Learning (Oct 2020)</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-item flex gap-3 items-center">
+                            <div class="w-10 text-red-600 text-xl text-center"><i class="fas fa-user-secret"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Iniciación al Hacking Ético</h4>
+                                <p class="text-xs text-gray-500">Comunix (Oct 2019)</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="page-number">11</div>
+            </div>
+
+            <div class="page bg-gradient-to-br from-indigo-50 to-blue-50">
+                <div class="page-content center-content text-center">
+                    <div class="ai-circle p-4 bg-white rounded-full shadow-lg mb-4">
+                        <i class="fas fa-robot text-4xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="font-bold text-blue-900 mt-2 text-xl">IA Integrada</h3>
+                    <p class="text-sm text-gray-600 mt-2 px-4 leading-relaxed">
+                        Este portafolio utiliza <strong>Gemini AI</strong> para demostrar mis capacidades de integración tecnológica.
+                    </p>
+                    <button id="btn-cover-letter" class="action-btn mt-8 flex items-center gap-2">
+                        <i class="fas fa-magic"></i> Generar Carta
+                    </button>
+                    <p class="text-xs text-gray-400 mt-4">Genera una carta de presentación basada en mi perfil completo.</p>
+                </div>
+                <div class="page-number">12</div>
+            </div>
+
+            <div class="page">
+                <div class="page-header">
+                    <h3>Contáctame</h3>
+                </div>
+                <div class="page-content center-content">
+                    <div class="contact-card w-full">
+                        <a href="mailto:victorlpz3293@gmail.com" class="contact-row flex items-center p-4 hover:bg-gray-50 rounded transition border-b">
+                            <div class="icon w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4"><i class="fas fa-envelope"></i></div>
+                            <div class="text font-medium text-gray-700">victorlpz3293@gmail.com</div>
+                        </a>
+                        <a href="#" class="contact-row flex items-center p-4 hover:bg-gray-50 rounded transition border-b">
+                            <div class="icon w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4"><i class="fas fa-phone"></i></div>
+                            <div class="text font-medium text-gray-700">+505 8133-6115</div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/victorlpz329/" target="_blank" class="contact-row flex items-center p-4 hover:bg-gray-50 rounded transition border-b">
+                            <div class="icon w-10 h-10 bg-blue-100 text-blue-800 rounded-full flex items-center justify-center mr-4"><i class="fab fa-linkedin"></i></div>
+                            <div class="text font-medium text-gray-700">/in/victorlpz329</div>
+                        </a>
+                        <div class="contact-row flex items-center p-4 rounded transition">
+                            <div class="icon w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-4"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="text font-medium text-gray-700">Ciudad Sandino, Managua</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-number">13</div>
+            </div>
+            
+            <div class="page">
+                <div class="page-content center-content bg-slate-50">
+                    <div class="opacity-20 text-center">
+                        <i class="fas fa-book-open text-6xl text-gray-300 mb-4"></i>
+                        <p class="font-serif text-sm text-gray-400">Gracias por leer</p>
+                    </div>
+                </div>
+                <div class="page-number">14</div>
+            </div>
+
+            <div class="page hard-cover back-cover">
+                <div class="cover-design">
+                    <div class="logo-final">VL</div>
+                    <h3 class="text-white mt-6 font-light uppercase tracking-widest text-sm">Fin del Portafolio</h3>
+                    <p class="mt-4 text-gray-400 text-xs px-8">
+                        Estoy listo para aportar valor a su organización desde el primer día.
+                    </p>
+                    <div class="mt-auto mb-8 text-xs text-gray-500">
+                        &copy; 2026 Victor R. Lopez<br>
+                        Desarrollo Web & IT
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="chat-widget" class="fixed bottom-6 right-6 z-50">
+        <div id="chat-window" class="hidden flex-col bg-white w-80 h-96 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 mb-4">
+            <div class="bg-slate-800 p-4 text-white flex justify-between items-center">
+                <span class="font-bold text-sm"><i class="fas fa-brain mr-2"></i>Asistente IA</span>
+                <button id="close-chat" class="hover:text-red-300"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-slate-50 text-sm space-y-3">
+                <div class="ai-msg bg-blue-100 p-2 rounded text-gray-800">Hola, soy la IA de Victor. ¿Qué quieres saber?</div>
+            </div>
+            <div class="p-3 bg-white border-t flex gap-2">
+                <input type="text" id="chat-input" class="flex-1 bg-gray-100 rounded-full px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500" placeholder="Pregunta algo...">
+                <button id="send-chat" class="bg-blue-600 text-white w-10 h-10 rounded-full hover:bg-blue-700 transition flex items-center justify-center"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button id="toggle-chat" class="bg-slate-900 text-white w-14 h-14 rounded-full shadow-xl hover:scale-110 transition flex items-center justify-center text-2xl border-4 border-white ml-auto">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+            <div class="bg-blue-900 text-white p-4 flex justify-between">
+                <h3 class="font-bold">Carta Generada por IA</h3>
+                <button onclick="closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="modal-content" class="p-8 overflow-y-auto font-serif leading-loose text-gray-800 text-sm"></div>
+            <div class="p-4 bg-gray-50 border-t flex justify-end gap-2">
+                <button onclick="downloadPDF()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm font-bold flex items-center"><i class="fas fa-file-pdf mr-2"></i> Descargar PDF</button>
+                <button onclick="copyText()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm font-bold flex items-center"><i class="fas fa-copy mr-2"></i> Copiar Texto</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
