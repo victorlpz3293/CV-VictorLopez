@@ -18,7 +18,7 @@ try {
 
 // Contexto Real para la IA
 const CONTEXTO_CV = `
-CANDIDATO: Victor R. Lopez. Ingeniero en Telemática (UNAN, 3er año). IT Manager en Kaitai Nicaragua.
+CANDIDATO: Victor R. Lopez. Ingeniero en Telemática (UNAN, 4to año). IT Manager en Kaitai Nicaragua.
 EXPERIENCIA: +6 años. Oficial TI (Mega Comunicaciones), Soporte (Hermoso y Vigil, IPESA).
 HARD SKILLS: Virtualización (VMWare/Proxmox), Windows Server, Linux, Cisco CCNA, Hacking Ético, Soporte L3.
 CONTACTO: victorlpz3293@gmail.com, +505 8133-6115.
@@ -84,7 +84,6 @@ async function sendMessage() {
 
     } catch (e) {
         // 2. SI FALLA LA IA, USA EL CEREBRO LOCAL (RESPALDO INTELIGENTE)
-        // Esto es lo que faltaba: lógica para responder si la API falla
         document.getElementById(loadId).remove();
         const respuestaLocal = cerebroLocal(text.toLowerCase());
         addMsg(respuestaLocal, 'ai-msg');
@@ -121,7 +120,6 @@ function cerebroLocal(pregunta) {
         return "¡Hola! Soy el asistente virtual. Pregúntame sobre la experiencia o habilidades de Victor.";
     }
     
-    // Respuesta por defecto si no entiende nada
     return "Victor es un profesional TI con experiencia en Infraestructura y Redes. ¿Te gustaría saber sobre su <b>Experiencia</b> o <b>Contacto</b>?";
 }
 
@@ -166,12 +164,10 @@ if(btnCover) {
         
         try {
             if (!model) throw new Error("Forzar respaldo");
-            // Intento IA
             const prompt = `Escribe una Carta de Presentación breve y profesional para Victor Lopez. Contexto: ${CONTEXTO_CV}`;
             const result = await model.generateContent(prompt);
             modalContent.innerText = result.response.text();
         } catch (e) {
-            // Respaldo
             await new Promise(r => setTimeout(r, 1000));
             modalContent.innerText = CARTA_RESPALDO;
         } finally {
@@ -185,7 +181,7 @@ if(btnCover) {
 window.closeModal = () => modal.classList.add('hidden');
 window.copyText = () => navigator.clipboard.writeText(modalContent.innerText).then(() => alert("Copiado"));
 
-// --- PDF ---
+// --- (1) FUNCIÓN PARA DESCARGAR LA CARTA COMO PDF ---
 window.downloadPDF = function() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -213,4 +209,33 @@ window.downloadPDF = function() {
     doc.text(splitText, marginLeft, 45);
 
     doc.save("Carta_Presentacion_Victor_Lopez.pdf");
+}
+
+// --- (2) FUNCIÓN MAESTRA: GUARDAR TODO EL PORTAFOLIO COMO PDF ---
+window.savePortfolioPDF = function() {
+    // 1. Crear contenedor temporal
+    let printArea = document.getElementById('print-area');
+    if (printArea) printArea.remove();
+    
+    printArea = document.createElement('div');
+    printArea.id = 'print-area';
+    document.body.appendChild(printArea);
+
+    // 2. Seleccionar todas las páginas de contenido (ignorando portadas para ahorrar tinta o incluyéndolas)
+    // Aquí tomamos 'page-content' para tener el texto limpio
+    const pages = document.querySelectorAll('.page-content');
+    
+    // 3. Clonar y preparar para imprimir
+    pages.forEach((page, index) => {
+        const sheet = document.createElement('div');
+        sheet.className = 'print-page'; // Usamos la clase CSS que agregaste
+        
+        // Clonar contenido
+        sheet.appendChild(page.cloneNode(true));
+        
+        printArea.appendChild(sheet);
+    });
+
+    // 4. Imprimir (El CSS @media print hará el resto)
+    window.print();
 }
