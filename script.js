@@ -18,7 +18,7 @@ try {
 
 // Contexto Real para la IA
 const CONTEXTO_CV = `
-CANDIDATO: Victor R. Lopez. Ingeniero en Telemática (UNAN, 3er año). IT Manager en Kaitai Nicaragua.
+CANDIDATO: Victor R. Lopez. Ingeniero en Telemática (UNAN, 4to año). IT Manager en Kaitai Nicaragua.
 EXPERIENCIA: +6 años. Oficial TI (Mega Comunicaciones), Soporte (Hermoso y Vigil, IPESA).
 HARD SKILLS: Virtualización (VMWare/Proxmox), Windows Server, Linux, Cisco CCNA, Hacking Ético, Soporte L3.
 CONTACTO: victorlpz3293@gmail.com, +505 8133-6115.
