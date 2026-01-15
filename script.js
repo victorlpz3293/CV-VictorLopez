@@ -3,7 +3,7 @@
 
 // --- CONFIGURACIÓN ---
 // Ahora apuntamos a TU servidor en AWS
-const BACKEND_URL = "http://54.242.109.228:3000/api/chat-cv";
+const BACKEND_URL = "https://backend-victor.onrender.com/api/chat-cv";
 
 let bookInstance = null;
 
