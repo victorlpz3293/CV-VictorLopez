@@ -28,7 +28,7 @@ HABILIDADES TÉCNICAS (HARD SKILLS):
 - Ciberseguridad: Hacking Ético, Análisis Forense, Gestión de Accesos.
 
 CERTIFICACIONES:
-- Analista SOC Nivel 1 (Comunidad Dojo, 2022).
+- Analista SOC Nivel 1 (Comunidad Dojo, 2025).
 - Google IT Support Certificate (2024).
 - CCNAv7: Introducción a Redes (2023).
 - Análisis Forense en Windows (2022).
