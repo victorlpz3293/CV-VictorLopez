@@ -1,58 +1,95 @@
-// NOTA: Ya no importamos GoogleGenerativeAI porque el servidor AWS se encarga de eso.
-// import { GoogleGenerativeAI } ... (ELIMINADO)
-
 // --- CONFIGURACIÓN ---
-// Ahora apuntamos a TU servidor en AWS
 const BACKEND_URL = "https://backend-cv-b6f5.onrender.com/api/chat-cv";
 
 let bookInstance = null;
 
-// Contexto (Se envía al servidor en cada petición)
+// Contexto SUPER DETALLADO (Sincronizado con tu PDF Enero 2026)
 const CONTEXTO_CV = `
-CANDIDATO: Victor R. Lopez. Ingeniero en Telemática (UNAN, 3er año). IT Manager en Kaitai Nicaragua.
-EXPERIENCIA: +6 años. Oficial TI (Mega Comunicaciones), Soporte (Hermoso y Vigil, IPESA).
-HARD SKILLS: Virtualización (VMWare/Proxmox), Windows Server, Linux, Cisco CCNA, Hacking Ético, Soporte L3.
-CONTACTO: victorlpz3293@gmail.com, +505 8133-6115.
+PERFIL: Victor R. Lopez. IT Manager y Especialista en Infraestructura con +6 años de experiencia.
 UBICACIÓN: Ciudad Sandino, Managua.
+EDUCACIÓN: Ingeniería en Telemática (UNAN - Managua). Actualmente cursando 4to Año (2023-2027). Técnico Medio en Computación (Megabyte Service).
+
+EXPERIENCIA LABORAL ACTUAL:
+- Responsable de TI (IT Manager) en Kaitai Nicaragua S.A (Sept 2025 - Actualidad).
+  Funciones: Gestión integral de TI, administración de servidores físicos/virtuales, seguridad, presupuestos y proveedores. Optimización de recursos y tiempos de respuesta.
+
+EXPERIENCIA PREVIA:
+- Oficial de TI en Mega Comunicaciones S.A (Oct 2022 - Jun 2025).
+  Logros: Virtualización (VMWare/Proxmox), SysAdmin (AD, DNS, GPO), VoIP (Grandstream), ITIL.
+- Ejecutivo de Servicio Técnico en Hermoso y Vigil S.A (Dic 2020 - Oct 2022).
+  Funciones: Soporte a equipos RICOH, software PaperCut, atención al cliente.
+- Soporte Técnico en IPESA de Nicaragua (May 2017 - Ene 2019).
+  Funciones: Servidores HPE, equipos Lenovo, redes y virtualización básica.
+
+HABILIDADES TÉCNICAS (HARD SKILLS):
+- Virtualización: Experto en VMWare ESXi y ProxmoxVE.
+- Sistemas Operativos: Windows Server (Admin avanzada), Linux.
+- Redes: Cisco (CCNAv7), Mikrotik, TCP/IP, VLANs, Routing/Switching.
+- Ciberseguridad: Hacking Ético, Análisis Forense, Gestión de Accesos.
+
+CERTIFICACIONES:
+- Analista SOC Nivel 1 (Comunidad Dojo, 2022).
+- Google IT Support Certificate (2024).
+- CCNAv7: Introducción a Redes (2023).
+- Análisis Forense en Windows (2022).
+- Especialista en Soporte IT (LinkedIn, 2020).
+
+CONTACTO:
+- Teléfono: +505 8133-6115
+- Correo: victorlpz3293@gmail.com
 `;
 
 // --- INICIALIZACIÓN DEL LIBRO ---
 document.addEventListener('DOMContentLoaded', () => {
     const bookElement = document.getElementById('book');
-    bookInstance = new St.PageFlip(bookElement, {
-        width: 450,
-        height: 650,
-        size: 'stretch',
-        minWidth: 350,
-        maxWidth: 550,
-        minHeight: 500,
-        maxHeight: 800,
-        maxShadowOpacity: 0.8,
-        showCover: true,
-        mobileScrollSupport: false,
-        startPage: 0
-    });
-    bookInstance.loadFromHTML(document.querySelectorAll('.page'));
+    if(bookElement) {
+        bookInstance = new St.PageFlip(bookElement, {
+            width: 450,
+            height: 650,
+            size: 'stretch',
+            minWidth: 350,
+            maxWidth: 550,
+            minHeight: 500,
+            maxHeight: 800,
+            maxShadowOpacity: 0.8,
+            showCover: true,
+            mobileScrollSupport: false,
+            startPage: 0
+        });
+        bookInstance.loadFromHTML(document.querySelectorAll('.page'));
+    }
 });
 
-// --- CHATBOT CONECTADO A AWS ---
+// --- CHATBOT ---
 const chatWindow = document.getElementById('chat-window');
 const chatInput = document.getElementById('chat-input');
 const msgsDiv = document.getElementById('chat-messages');
+const toggleBtn = document.getElementById('toggle-chat');
+const closeBtn = document.getElementById('close-chat');
+const sendBtn = document.getElementById('send-chat');
 
-document.getElementById('toggle-chat').addEventListener('click', () => {
-    chatWindow.classList.toggle('hidden');
-    chatWindow.classList.toggle('flex');
-    if(!chatWindow.classList.contains('hidden')) chatInput.focus();
-});
+if(toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+        chatWindow.classList.toggle('hidden');
+        chatWindow.classList.toggle('flex');
+        if(!chatWindow.classList.contains('hidden')) chatInput.focus();
+    });
+}
 
-document.getElementById('close-chat').addEventListener('click', () => {
-    chatWindow.classList.add('hidden');
-    chatWindow.classList.remove('flex');
-});
+if(closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        chatWindow.classList.add('hidden');
+        chatWindow.classList.remove('flex');
+    });
+}
 
-document.getElementById('send-chat').addEventListener('click', sendMessage);
-chatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
+if(sendBtn) {
+    sendBtn.addEventListener('click', sendMessage);
+}
+
+if(chatInput) {
+    chatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
+}
 
 async function sendMessage() {
     const text = chatInput.value.trim();
@@ -63,43 +100,46 @@ async function sendMessage() {
     const loadId = addMsg('Consultando servidor...', 'ai-msg animate-pulse');
     
     try {
-        // LLAMADA AL SERVIDOR AWS
         const response = await fetch(BACKEND_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 prompt: text,
                 context: CONTEXTO_CV
             })
         });
 
-        if (!response.ok) throw new Error("Error en servidor AWS");
+        if (!response.ok) throw new Error("Error en servidor AWS/Render");
 
         const data = await response.json();
         
-        document.getElementById(loadId).remove();
+        const loader = document.getElementById(loadId);
+        if(loader) loader.remove();
+        
         addMsg(formatText(data.reply), 'ai-msg');
 
     } catch (e) {
         console.error(e);
-        // SI FALLA AWS, USAMOS EL CEREBRO LOCAL
-        document.getElementById(loadId).remove();
+        const loader = document.getElementById(loadId);
+        if(loader) loader.remove();
+        
+        // RESPUESTA OFFLINE INTELIGENTE
         const respuestaLocal = cerebroLocal(text.toLowerCase());
         addMsg(respuestaLocal + "<br><span style='font-size:9px; color:red'>(Modo Offline)</span>", 'ai-msg');
     }
 }
 
-// --- CEREBRO LOCAL (Respaldo) ---
 function cerebroLocal(pregunta) {
-    if (pregunta.includes('contacto') || pregunta.includes('correo') || pregunta.includes('celular')) {
-        return "Contacto: <b>+505 8133-6115</b> o <b>victorlpz3293@gmail.com</b>.";
+    if (pregunta.includes('contacto') || pregunta.includes('correo') || pregunta.includes('telefono')) {
+        return "Puedes contactarme al <b>+505 8133-6115</b> o <b>victorlpz3293@gmail.com</b>.";
     }
-    if (pregunta.includes('trabaja') || pregunta.includes('actual') || pregunta.includes('empresa')) {
-        return "Actualmente es <b>Responsable de TI en Kaitai Nicaragua S.A.</b>";
+    if (pregunta.includes('trabajo') || pregunta.includes('actual') || pregunta.includes('experiencia')) {
+        return "Actualmente soy <b>Responsable de TI en Kaitai Nicaragua S.A.</b>";
     }
-    return "No pude conectar con el servidor IA, pero soy Victor Lopez, IT Manager.";
+    if (pregunta.includes('estudio') || pregunta.includes('universidad')) {
+        return "Estoy cursando el 4to año de Ingeniería en Telemática en la UNAN.";
+    }
+    return "No pude conectar con el servidor IA, pero soy Victor Lopez, IT Manager. ¿En qué puedo ayudarte?";
 }
 
 function addMsg(html, cssClass) {
@@ -111,15 +151,18 @@ function addMsg(html, cssClass) {
     return div.id = 'msg-' + Date.now();
 }
 
-function formatText(text) { return text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); }
+function formatText(text) { 
+    if(!text) return "";
+    return text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); 
+}
 
-// --- GENERADOR DE CARTA (Conectado a AWS) ---
+// --- GENERADOR DE CARTA ---
 const modal = document.getElementById('modal-overlay');
 const modalContent = document.getElementById('modal-content');
 const btnCover = document.getElementById('btn-cover-letter');
 
-// Carta de Respaldo Fija (Por si falla AWS)
-const CARTA_RESPALDO = `Estimado(a) Gerente de Selección,\n\nEs un placer presentar mi candidatura. Soy IT Manager con experiencia en virtualización y redes...\n\nAtentamente,\nVictor R. Lopez`;
+// Carta de Respaldo Fija
+const CARTA_RESPALDO = `Estimado(a) Gerente de Selección,\n\nEs un placer presentar mi candidatura. Soy IT Manager con más de 6 años de experiencia en virtualización, redes y gestión de infraestructura. Actualmente me desempeño como Responsable de TI en Kaitai Nicaragua.\n\nAtentamente,\nVictor R. Lopez`;
 
 if(btnCover) {
     btnCover.addEventListener('click', async () => {
@@ -128,17 +171,16 @@ if(btnCover) {
         btnCover.disabled = true;
         
         try {
-            // Reutilizamos el mismo endpoint de chat, pero con una instrucción específica
             const response = await fetch(BACKEND_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    prompt: "Redacta una carta de presentación formal y profesional para un puesto de TI.",
+                    prompt: "Redacta una carta de presentación formal y persuasiva para un puesto de Gerencia TI o Infraestructura, destacando mi rol actual en Kaitai y mis certificaciones.",
                     context: CONTEXTO_CV
                 })
             });
 
-            if (!response.ok) throw new Error("Error AWS");
+            if (!response.ok) throw new Error("Error API");
             const data = await response.json();
             modalContent.innerText = data.reply;
 
@@ -154,13 +196,13 @@ if(btnCover) {
 }
 
 window.closeModal = () => modal.classList.add('hidden');
-window.copyText = () => navigator.clipboard.writeText(modalContent.innerText).then(() => alert("Copiado"));
+window.copyText = () => navigator.clipboard.writeText(modalContent.innerText).then(() => alert("Texto copiado al portapapeles"));
 
 // --- DESCARGA PDF ---
 window.downloadPDF = function() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const text = document.getElementById('modal-content').innerText;
+    const text = document.getElementById('modal-content').innerText || "";
     const marginLeft = 20;
     const pageWidth = doc.internal.pageSize.getWidth();
     const maxLineWidth = pageWidth - (marginLeft * 2);
@@ -170,11 +212,12 @@ window.downloadPDF = function() {
     doc.setTextColor(30, 58, 138);
     doc.text("Victor R. Lopez", marginLeft, 20);
     doc.setFontSize(10);
-    doc.text("victorlpz3293@gmail.com", marginLeft, 26);
+    doc.text("IT Manager | victorlpz3293@gmail.com", marginLeft, 26);
 
     doc.setFont("times", "normal");
     doc.setFontSize(12);
     doc.setTextColor(0);
+    
     const splitText = doc.splitTextToSize(text, maxLineWidth);
     doc.text(splitText, marginLeft, 40);
 
